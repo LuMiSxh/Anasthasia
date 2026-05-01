@@ -1,0 +1,24 @@
+/* Imperial — Luxury Cathedral (light) + Immortal Abyssal (dark) */
+:root {
+	--bg: #f4f4f5;
+	--surface: #ffffff;
+	--panel: #fafafa;
+	--border: rgba(0, 0, 0, 0.1);
+	--text: #18181b;
+	--muted: #71717a;
+	--accent: #c89520;
+	--accent-strong: #9a6d0e;
+	--accent-gradient: linear-gradient(135deg, #fde047 0%, #c89520 40%, #9a6d0e 100%);
+}
+
+.dark {
+	--bg: #050505;
+	--surface: #121212;
+	--panel: #1a1a1a;
+	--border: rgba(255, 255, 255, 0.08);
+	--text: #fafafa;
+	--muted: #a1a1aa;
+	--accent: #d4af37;
+	--accent-strong: #fde047;
+	--accent-gradient: linear-gradient(135deg, #fde047 0%, #d4af37 40%, #a17f1a 100%);
+}

@@ -1,0 +1,36 @@
+name: Version Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Semver version to create, for example 0.1.0
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run check
+      - run: pnpm run build
+      - run: git config user.name "github-actions[bot]"
+      - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - run: npm version "${{ inputs.version }}" --no-git-tag-version
+      - run: git add package.json pnpm-lock.yaml
+      - run: 'git commit -m "chore: release v${{ inputs.version }}"'
+      - run: git tag "v${{ inputs.version }}"
+      - run: git push origin HEAD --follow-tags
