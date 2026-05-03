@@ -1,0 +1,41 @@
+/* Dusk — Dusk Haze (light) + Dusk Night (dark) */
+:root {
+	--color-anasthasia-bg: #f5f3ff;
+	--color-anasthasia-surface: #ffffff;
+	--color-anasthasia-panel: #ede9fe;
+	--color-anasthasia-border: rgba(109, 40, 217, 0.12);
+	--color-anasthasia-text: #1e1a2e;
+	--color-anasthasia-muted: #6b5f8a;
+	--color-anasthasia-accent: #7c3aed;
+	--color-anasthasia-accent-strong: #5b21b6;
+	--background-image-accent-gradient: linear-gradient(
+		135deg,
+		#a78bfa 0%,
+		#7c3aed 40%,
+		#5b21b6 100%
+	);
+
+	/* Radius scale — slightly sharper than imperial, rounder than crimson */
+	--radius-sm: 0.25rem;
+	--radius-md: 0.375rem;
+	--radius-lg: 0.625rem;
+	--radius-xl: 0.875rem;
+	--radius-2xl: 1.125rem;
+}
+
+:root.dark {
+	--color-anasthasia-bg: #0d0a1a;
+	--color-anasthasia-surface: #160e2e;
+	--color-anasthasia-panel: #1e1040;
+	--color-anasthasia-border: rgba(255, 255, 255, 0.08);
+	--color-anasthasia-text: #f5f0ff;
+	--color-anasthasia-muted: #9b89c0;
+	--color-anasthasia-accent: #a78bfa;
+	--color-anasthasia-accent-strong: #c4b5fd;
+	--background-image-accent-gradient: linear-gradient(
+		135deg,
+		#c4b5fd 0%,
+		#a78bfa 40%,
+		#7c3aed 100%
+	);
+}

@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import imperialUrl from '$lib/flavours/imperial.css?url';
+	import crimsonUrl from '$lib/flavours/crimson.css?url';
+	import duskUrl from '$lib/flavours/dusk.css?url';
+
+	const flavourUrls: Record<string, string> = {
+		imperial: imperialUrl,
+		crimson: crimsonUrl,
+		dusk: duskUrl
+	};
 	import {
 		Alert,
 		Badge,
@@ -27,7 +35,7 @@
 		uiPrefs
 	} from '$lib/index.js';
 
-	type Flavour = 'none' | 'imperial';
+	type Flavour = 'none' | 'imperial' | 'crimson' | 'dusk';
 	type Palette = 'light' | 'dark';
 	type Density = 'compact' | 'comfortable' | 'spacious';
 	type Format = 'avif' | 'webp' | 'original';
@@ -59,7 +67,9 @@
 
 	const flavourOptions: { value: Flavour; label: string }[] = [
 		{ value: 'none', label: 'None' },
-		{ value: 'imperial', label: 'Imperial' }
+		{ value: 'imperial', label: 'Imperial' },
+		{ value: 'crimson', label: 'Crimson' },
+		{ value: 'dusk', label: 'Dusk' }
 	];
 
 	let flavour = $state<Flavour>('imperial');
@@ -90,8 +100,8 @@
 
 <svelte:head>
 	<title>Anasthasia Showcase</title>
-	{#if flavour === 'imperial'}
-		<link rel="stylesheet" href={imperialUrl} />
+	{#if flavourUrls[flavour]}
+		<link rel="stylesheet" href={flavourUrls[flavour]} />
 	{/if}
 </svelte:head>
 
@@ -360,7 +370,9 @@
 		</div>
 	</div>
 
-	<KeyHintBar />
+	<div class="fixed inset-x-0 bottom-0">
+		<KeyHintBar />
+	</div>
 	<ToastProvider />
 
 	<Dialog

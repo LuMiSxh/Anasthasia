@@ -86,11 +86,11 @@
 	/* Light mode: gradient text. -webkit-text-fill-color leaves SVG stroke/fill
      reading `color` (the flat accent), so icons stay visible. */
 	.btn-primary-label {
-		background-image: var(--accent-gradient);
+		background-image: var(--background-image-accent-gradient);
 		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		color: var(--accent);
+		color: var(--color-anasthasia-accent);
 	}
 
 	/* Dark mode: full reset. Black text, no gradient clip. */

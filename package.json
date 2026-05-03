@@ -33,7 +33,9 @@
 			"default": "./dist/bootstrap.js"
 		},
 		"./styles": "./dist/styles.css",
-		"./flavours/imperial": "./dist/flavours/imperial.css"
+		"./flavours/imperial": "./dist/flavours/imperial.css",
+		"./flavours/crimson": "./dist/flavours/crimson.css",
+		"./flavours/dusk": "./dist/flavours/dusk.css"
 	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"

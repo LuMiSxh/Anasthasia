@@ -44,9 +44,10 @@ A flavour is a single CSS file that defines both the light (`:root`) and dark (`
 
 **Available flavours:**
 
-| Flavour    | Light                                   | Dark                                    |
-| ---------- | --------------------------------------- | --------------------------------------- |
-| `imperial` | Luxury Cathedral — warm whites and gold | Immortal Abyssal — deep blacks and gold |
+| Flavour    | Light                                       | Dark                                     |
+| ---------- | ------------------------------------------- | ---------------------------------------- |
+| `imperial` | Luxury Cathedral — warm whites and gold     | Immortal Abyssal — deep blacks and gold  |
+| `crimson`  | Crimson Dawn — warm off-whites and deep red | Crimson Noir — near-black with vivid red |
 
 Import a flavour after `anasthasia/styles` in your stylesheet. Additional flavours can be added by creating a new CSS file with `:root` and `.dark` blocks.
 

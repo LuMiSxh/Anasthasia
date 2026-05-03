@@ -201,9 +201,10 @@ A flavour is a CSS file that defines all tokens for both `:root` (light) and `.d
 
 **Available flavours:**
 
-| Import                         | Description                                                  |
-| ------------------------------ | ------------------------------------------------------------ |
-| `anasthasia/flavours/imperial` | Luxury Cathedral light + Immortal Abyssal dark (gold accent) |
+| Import                         | Description                                                               |
+| ------------------------------ | ------------------------------------------------------------------------- |
+| `anasthasia/flavours/imperial` | Luxury Cathedral light + Immortal Abyssal dark — gold, generous rounding  |
+| `anasthasia/flavours/crimson`  | Crimson Dawn light + Crimson Noir dark — deep red, sharp precise rounding |
 
 **Creating a custom flavour:**
 
@@ -779,98 +780,123 @@ All transitions accept optional `{ duration?: number; y?: number }` params (wher
 
 Defined in `anasthasia/styles`, available globally.
 
-| Class                   | Description                                                              |
-| ----------------------- | ------------------------------------------------------------------------ |
-| `.anasthasia-label`     | `text-xs font-bold uppercase tracking-wider text-muted`                  |
-| `.anasthasia-caption`   | `text-xs leading-relaxed text-muted`                                     |
-| `.anasthasia-body`      | `text-sm leading-relaxed text-muted`                                     |
-| `.anasthasia-mono`      | `font-mono text-xs text-text`                                            |
-| `.text-accent-gradient` | Gradient text using `--accent-gradient` (clip + webkit fill)             |
-| `.text-fill-reset`      | Resets `-webkit-text-fill-color` to `currentColor`                       |
-| `.bevel-accent`         | Box-shadow bevel using `--accent` colour — for elevated primary surfaces |
+| Class                   | Description                                                    |
+| ----------------------- | -------------------------------------------------------------- |
+| `.anasthasia-label`     | `text-xs font-bold uppercase tracking-wider text-muted`        |
+| `.anasthasia-caption`   | `text-xs leading-relaxed text-muted`                           |
+| `.anasthasia-body`      | `text-sm leading-relaxed text-muted`                           |
+| `.anasthasia-mono`      | `font-mono text-xs text-text`                                  |
+| `.text-accent-gradient` | Gradient text using `--background-image-accent-gradient`       |
+| `.text-fill-reset`      | Resets `-webkit-text-fill-color` to `currentColor`             |
+| `.bevel-accent`         | Accent-tinted box-shadow bevel — for elevated primary surfaces |
 
 ---
 
 ## Writing a Custom Flavour
 
-A flavour is a plain CSS file you create **in your own app** — not inside Anasthasia. It defines all nine tokens for both light and dark mode. Anasthasia's `styles.css` ships a neutral grey fallback, so your flavour only needs to override what it changes — but in practice you should define all tokens explicitly to avoid relying on the fallback.
+A flavour is a plain CSS file you create **in your own app**. It overrides CSS custom properties on `:root` so that components adapt automatically without any class name changes.
+
+Anasthasia's `styles.css` registers the `--color-anasthasia-*` namespace in its `@theme` block (build-time only). Your flavour sets the actual values at runtime via `:root {}` — later stylesheet wins.
+
+### How it works
+
+- **Colours** are plain `:root` custom properties using the `--color-anasthasia-*` names. Tailwind v4 utilities like `bg-anasthasia-surface` reference `var(--color-anasthasia-surface)` at runtime, so overriding the var is enough.
+- **Design tokens** (radius, shadow) override Tailwind's own CSS variables (`--radius-lg`, `--shadow-md`, etc.) on `:root`. Components use standard Tailwind classes like `rounded-lg` — the flavour controls what those resolve to.
+- **Dark mode** overrides use a `:root.dark {}` block. The higher specificity (0,2,0 vs 0,1,0) ensures the flavour always beats the base dark defaults regardless of stylesheet load order.
 
 ### Token reference
 
-Every token must be defined in both `:root` (light mode) and `.dark` (dark mode).
-
-| Token               | Type     | Role                                                                             |
-| ------------------- | -------- | -------------------------------------------------------------------------------- |
-| `--bg`              | colour   | Page / window background — the furthest-back surface                             |
-| `--surface`         | colour   | Primary content containers (cards, panels)                                       |
-| `--panel`           | colour   | Panel headers, sidebars, nested sections — one step above `--bg`                 |
-| `--border`          | colour   | All borders and dividers — usually a low-opacity version of text                 |
-| `--text`            | colour   | Primary body text                                                                |
-| `--muted`           | colour   | Secondary text, placeholders, disabled labels, captions                          |
-| `--accent`          | colour   | Interactive colour — links, active states, focus rings, highlights               |
-| `--accent-strong`   | colour   | Pressed / stronger variant of accent                                             |
-| `--accent-gradient` | gradient | Used as the primary button background (dark mode) and gradient text (light mode) |
+| Token                                                         | Type     | Role                                                       |
+| ------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
+| `--color-anasthasia-bg`                                       | colour   | Page / window background                                   |
+| `--color-anasthasia-surface`                                  | colour   | Primary content containers (cards, panels)                 |
+| `--color-anasthasia-panel`                                    | colour   | Panel headers, sidebars, nested sections                   |
+| `--color-anasthasia-border`                                   | colour   | Borders and dividers                                       |
+| `--color-anasthasia-text`                                     | colour   | Primary body text                                          |
+| `--color-anasthasia-muted`                                    | colour   | Secondary text, placeholders, hints                        |
+| `--color-anasthasia-accent`                                   | colour   | Interactive colour — links, focus rings, highlights        |
+| `--color-anasthasia-accent-strong`                            | colour   | Pressed / stronger variant of accent                       |
+| `--background-image-accent-gradient`                          | gradient | Primary button background (dark) and gradient text (light) |
+| `--radius-sm` / `--radius-md` / `--radius-lg` / `--radius-xl` | length   | Override Tailwind's `rounded-*` scale                      |
+| `--shadow-sm` / `--shadow-md` / `--shadow-lg`                 | value    | Override Tailwind's `shadow-*` scale (optional)            |
 
 ### Surface depth order
 
-The four surface tokens must form a visible depth hierarchy when rendered side by side:
+The three surface colours must form a visible depth hierarchy:
 
 ```
---bg  <  --panel  <  --surface
+--color-anasthasia-bg  <  --color-anasthasia-panel  <  --color-anasthasia-surface
 ```
 
-In light mode this usually means `--bg` is the darkest of the three (a slight grey), `--surface` is pure white, and `--panel` sits between them. In dark mode it is the reverse — `--bg` is the deepest black, `--surface` is slightly lighter.
+In light mode `--bg` is a slight grey, `--surface` is pure white, `--panel` sits between. In dark mode the order reverses — `--bg` is deepest black, `--surface` is slightly lighter.
 
-### Choosing accent colours
+### Accent colour rules
 
-- `--accent` must be readable as text on both `--surface` and `--panel` backgrounds. Check contrast — aim for at least WCAG AA (4.5:1 for normal text).
-- `--accent-strong` is used for hover/active states and must be visually distinct from `--accent` — typically 15–20% darker in light mode, slightly brighter in dark mode.
-- `--accent-gradient` is a CSS `linear-gradient(...)` value. In light mode it is used as gradient text on a dark (usually black) primary button background. In dark mode it is used as the full button background with black text on top. Both use cases need the gradient to be legible — avoid very low-contrast stops.
+- `--color-anasthasia-accent` must be readable as text on both `--surface` and `--panel`. Aim for WCAG AA (4.5:1).
+- `--color-anasthasia-accent-strong` should be ~15–20% darker in light mode, slightly brighter in dark mode.
+- `--background-image-accent-gradient` is a `linear-gradient(...)`. In light mode it renders as gradient text on a black button; in dark mode as the button background with black text. Both must be legible.
 
 ### Border opacity
 
-`--border` is almost always a semi-transparent value rather than a flat colour — this lets it adapt naturally to any background depth:
+Use semi-transparent values for `--color-anasthasia-border` so it adapts across surface depths:
 
 ```css
-/* Light mode — dark ink at low opacity */
---border: rgba(0, 0, 0, 0.1);
+/* Light mode */
+--color-anasthasia-border: rgba(0, 0, 0, 0.1);
 
-/* Dark mode — white ink at very low opacity */
---border: rgba(255, 255, 255, 0.08);
+/* Dark mode */
+--color-anasthasia-border: rgba(255, 255, 255, 0.08);
 ```
 
-### Minimal example
+### Full example
 
 ```css
 /* src/styles/flavours/ocean.css */
 :root {
-	--bg: #f0f4f8;
-	--surface: #ffffff;
-	--panel: #e8eef4;
-	--border: rgba(0, 0, 0, 0.08);
-	--text: #0f172a;
-	--muted: #64748b;
-	--accent: #0ea5e9;
-	--accent-strong: #0284c7;
-	--accent-gradient: linear-gradient(135deg, #7dd3fc 0%, #0ea5e9 50%, #0284c7 100%);
+	/* Colours */
+	--color-anasthasia-bg: #f0f4f8;
+	--color-anasthasia-surface: #ffffff;
+	--color-anasthasia-panel: #e8eef4;
+	--color-anasthasia-border: rgba(0, 0, 0, 0.08);
+	--color-anasthasia-text: #0f172a;
+	--color-anasthasia-muted: #64748b;
+	--color-anasthasia-accent: #0ea5e9;
+	--color-anasthasia-accent-strong: #0284c7;
+	--background-image-accent-gradient: linear-gradient(
+		135deg,
+		#7dd3fc 0%,
+		#0ea5e9 50%,
+		#0284c7 100%
+	);
+
+	/* Radius — override Tailwind's built-in rounded-* scale */
+	--radius-sm: 0.25rem;
+	--radius-md: 0.375rem;
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.75rem;
 }
 
-.dark {
-	--bg: #020b14;
-	--surface: #0d1f2d;
-	--panel: #112233;
-	--border: rgba(255, 255, 255, 0.07);
-	--text: #f1f5f9;
-	--muted: #94a3b8;
-	--accent: #38bdf8;
-	--accent-strong: #7dd3fc;
-	--accent-gradient: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 50%, #0ea5e9 100%);
+:root.dark {
+	--color-anasthasia-bg: #020b14;
+	--color-anasthasia-surface: #0d1f2d;
+	--color-anasthasia-panel: #112233;
+	--color-anasthasia-border: rgba(255, 255, 255, 0.07);
+	--color-anasthasia-text: #f1f5f9;
+	--color-anasthasia-muted: #94a3b8;
+	--color-anasthasia-accent: #38bdf8;
+	--color-anasthasia-accent-strong: #7dd3fc;
+	--background-image-accent-gradient: linear-gradient(
+		135deg,
+		#7dd3fc 0%,
+		#38bdf8 50%,
+		#0ea5e9 100%
+	);
 }
 ```
 
 ### Wiring it up
 
-Import the flavour **after** `anasthasia/styles` in your root stylesheet. The order matters — your flavour must come last so it wins the cascade:
+Import the flavour **after** `anasthasia/styles` in your root stylesheet:
 
 ```css
 @import 'tailwindcss';
@@ -878,15 +904,16 @@ Import the flavour **after** `anasthasia/styles` in your root stylesheet. The or
 @import './styles/flavours/ocean.css';
 ```
 
-That is all that is required. No changes to any component or Tailwind config are needed — every Anasthasia component reads exclusively from these tokens.
+No component changes needed. Every Anasthasia component uses standard Tailwind classes (`rounded-lg`, `bg-anasthasia-surface`, etc.) — the flavour controls what those resolve to.
 
 ### Testing your flavour
 
 Check each of the following in both light and dark mode:
 
-- [ ] `--accent` text is readable on `--surface` and `--panel` backgrounds
-- [ ] `--muted` text is readable but clearly lower contrast than `--text`
-- [ ] `--border` is visible against all three surface colours
-- [ ] The primary `Button` renders correctly in both modes (gradient text in light, gradient background in dark)
-- [ ] Focus rings (accent-coloured) are clearly visible on both light and dark backgrounds
+- [ ] `--color-anasthasia-accent` text is readable on `--surface` and `--panel`
+- [ ] `--color-anasthasia-muted` is clearly lower contrast than `--color-anasthasia-text`
+- [ ] `--color-anasthasia-border` is visible against all three surface colours
+- [ ] The primary `Button` renders correctly (gradient text in light, gradient background in dark)
+- [ ] Focus rings are clearly visible on both light and dark backgrounds
 - [ ] The `bevel-accent` shadow is visible on the primary button in dark mode
+- [ ] `rounded-lg` / `rounded-xl` components reflect your intended radius scale
