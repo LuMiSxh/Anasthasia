@@ -56,13 +56,16 @@ jobs:
           git add package.json pnpm-lock.yaml
           git commit -m "chore: release v${{ inputs.version }}"
           git tag "v${{ inputs.version }}"
-          git push origin HEAD --follow-tags
+
+          # Safely push the commit back to the branch (e.g., main)
+          git push origin "HEAD:${{ github.ref_name }}"
+
+          # Explicitly push the tag
+          git push origin "v${{ inputs.version }}"
 
       - name: Create GitHub Release & Auto-Changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # The --generate-notes flag natively generates a changelog based on
-        # PRs and commits merged since your previous tag.
         run: |
           gh release create "v${{ inputs.version }}" \
             --title "Release v${{ inputs.version }}" \
