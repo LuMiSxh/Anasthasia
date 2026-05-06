@@ -1,10 +1,10 @@
-name: Version Tag
+name: Version Tag and Release
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: Semver version to create, for example 0.1.0
+        description: 'Semver version to create, for example 0.1.0'
         required: true
         type: string
 
@@ -12,27 +12,59 @@ permissions:
   contents: write
 
 jobs:
-  tag:
+  tag_and_release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout repository
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
         with:
           version: latest
-      - uses: actions/setup-node@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint
-      - run: pnpm run check
-      - run: pnpm run build
-      - run: git config user.name "github-actions[bot]"
-      - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - run: npm version "${{ inputs.version }}" --no-git-tag-version
-      - run: git add package.json pnpm-lock.yaml
-      - run: 'git commit -m "chore: release v${{ inputs.version }}"'
-      - run: git tag "v${{ inputs.version }}"
-      - run: git push origin HEAD --follow-tags
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linting
+        run: pnpm run lint
+
+      - name: Run checks
+        run: pnpm run check
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update version in package.json
+        run: npm version "${{ inputs.version }}" --no-git-tag-version
+
+      - name: Commit and push tag
+        run: |
+          git add package.json pnpm-lock.yaml
+          git commit -m "chore: release v${{ inputs.version }}"
+          git tag "v${{ inputs.version }}"
+          git push origin HEAD --follow-tags
+
+      - name: Create GitHub Release & Auto-Changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # The --generate-notes flag natively generates a changelog based on
+        # PRs and commits merged since your previous tag.
+        run: |
+          gh release create "v${{ inputs.version }}" \
+            --title "Release v${{ inputs.version }}" \
+            --generate-notes \
+            --latest
