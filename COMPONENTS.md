@@ -118,7 +118,7 @@ Prefer the named transitions from Anasthasia over custom animations. All named t
 ### 1. Install
 
 ```sh
-pnpm add github:LuMiSxh/Anasthasia#v0.1.0
+pnpm add github:LuMiSxh/Anasthasia#v0.1.1
 ```
 
 ### 2. Import fonts (root layout)

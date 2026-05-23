@@ -16,8 +16,13 @@ export function dropdownPortal(
 	document.body.appendChild(node);
 	reposition();
 
+	function handleScroll(event: Event) {
+		if (node.contains(event.target as Node)) return;
+		onclose();
+	}
+
 	window.addEventListener('resize', reposition);
-	window.addEventListener('scroll', onclose, { capture: true, passive: true });
+	window.addEventListener('scroll', handleScroll, { capture: true, passive: true });
 
 	return {
 		update(newParams: { anchor: HTMLElement; onclose: () => void }) {
@@ -27,7 +32,7 @@ export function dropdownPortal(
 		},
 		destroy() {
 			window.removeEventListener('resize', reposition);
-			window.removeEventListener('scroll', onclose, { capture: true });
+			window.removeEventListener('scroll', handleScroll, { capture: true });
 			node.remove();
 		}
 	};

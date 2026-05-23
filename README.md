@@ -60,7 +60,7 @@ Import a flavour after `anasthasia/styles` in your stylesheet. Additional flavou
 ## Installation
 
 ```sh
-pnpm add github:LuMiSxh/Anasthasia#v0.1.0
+pnpm add github:LuMiSxh/Anasthasia#v0.1.1
 ```
 
 ### Prerequisites

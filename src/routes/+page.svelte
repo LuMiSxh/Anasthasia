@@ -72,6 +72,24 @@
 		{ value: 'dusk', label: 'Dusk' }
 	];
 
+	const scrollOptions = Array.from({ length: 32 }, (_, index) => ({
+		value: `option-${index + 1}`,
+		label: `Option ${index + 1}`
+	}));
+
+	const searchOptions = [
+		{ value: 'chapter-001', label: 'Chapter 001 — The Wake' },
+		{ value: 'chapter-002', label: 'Chapter 002 — Silverline' },
+		{ value: 'chapter-003', label: 'Chapter 003 — The Crossing' },
+		{ value: 'chapter-004', label: 'Chapter 004 — Emberfall' },
+		{ value: 'chapter-005', label: 'Chapter 005 — Glassward' },
+		{ value: 'chapter-006', label: 'Chapter 006 — The Drift' },
+		{ value: 'chapter-007', label: 'Chapter 007 — Thornlight' },
+		{ value: 'chapter-008', label: 'Chapter 008 — Nightbloom' },
+		{ value: 'chapter-009', label: 'Chapter 009 — The Quiet' },
+		{ value: 'chapter-010', label: 'Chapter 010 — Starwake' }
+	];
+
 	let flavour = $state<Flavour>('imperial');
 	let title = $state('Anasthasia');
 	let density = $state<Density>('compact');
@@ -82,6 +100,9 @@
 	let showAdvanced = $state(true);
 	let dialogOpen = $state(false);
 	let palette = $derived<Palette>(theme.dark ? 'dark' : 'light');
+	let scrollChoice = $state('option-1');
+	let searchChoice = $state('chapter-001');
+	let emptyChoice = $state('');
 
 	onMount(() => {
 		theme.init();
@@ -276,6 +297,34 @@
 							disabled
 							hint="Disabled select state."
 						/>
+					</div>
+
+					<div class="rounded-lg border border-anasthasia-border/60 bg-anasthasia-bg/40 p-3">
+						<div class="mb-2 text-xs font-semibold tracking-wide text-anasthasia-muted uppercase">
+							Select review
+						</div>
+						<div class="grid gap-3 sm:grid-cols-2">
+							<Select
+								label="Scrollable list"
+								options={scrollOptions}
+								bind:value={scrollChoice}
+								hint="Mouse wheel scrolling stays open."
+							/>
+							<Select
+								label="Searchable"
+								options={searchOptions}
+								bind:value={searchChoice}
+								search
+								hint="Type to filter chapters."
+							/>
+							<Select
+								label="Empty"
+								options={[]}
+								bind:value={emptyChoice}
+								placeholder="No options"
+								hint="Won't open when empty."
+							/>
+						</div>
 					</div>
 
 					<Toggle label="Checked toggle" hint="Square thumb, rounded track." bind:checked />
