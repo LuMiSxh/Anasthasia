@@ -2,9 +2,9 @@
 
 # Anasthasia
 
-**A Svelte 5 component library and design system for desktop-grade applications**
+**A Svelte 5 component library and design system for desktop applications**
 
-Reusable UI primitives, design tokens, flavour theming, and interaction utilities — extracted from Thasia and built to scale.
+A collection of reusable UI primitives, design tokens, theme configurations, and utilities — extracted from Thasia and designed to scale.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/LuMiSxh/Anasthasia)](https://github.com/LuMiSxh/Anasthasia/tags)
@@ -20,11 +20,11 @@ Reusable UI primitives, design tokens, flavour theming, and interaction utilitie
 
 ### Design Tokens
 
-A strict set of semantic CSS variables (`--bg`, `--surface`, `--panel`, `--border`, `--text`, `--muted`, `--accent`, `--accent-strong`) mapped to Tailwind v4 utility classes via `@theme`. Every component is built exclusively against these tokens — no hardcoded colors anywhere.
+A set of semantic CSS variables (`--bg`, `--surface`, `--panel`, `--border`, `--text`, `--muted`, `--accent`, `--accent-strong`) mapped to Tailwind v4 utility classes via `@theme`. Every component is built using these tokens, avoiding hardcoded colors.
 
 ### Component Library
 
-18 production-ready Svelte 5 components covering the core UI surface:
+18 Svelte 5 components covering common UI elements:
 
 | Primitives         | Feedback        | Layout         | Keyboard          |
 | ------------------ | --------------- | -------------- | ----------------- |
@@ -36,24 +36,24 @@ A strict set of semantic CSS variables (`--bg`, `--surface`, `--panel`, `--borde
 
 ### Theming
 
-Light and dark mode via a `.dark` class on `<html>`. The `theme` store manages the toggle and persists the preference in localStorage, with OS-preference fallback. Switching is instant — all color transitions are CSS-driven at 300ms.
+Light and dark mode support using a `.dark` class on `<html>`. The `theme` store manages toggles and saves preferences to localStorage, falling back to OS settings. Color transitions are handled via CSS (300ms).
 
 ### Flavour System
 
-A flavour is a single CSS file that defines both the light (`:root`) and dark (`.dark`) color tokens for a complete visual personality. `styles.css` ships no colors — a flavour import is required.
+A flavour is a CSS file defining light (`:root`) and dark (`.dark`) color tokens. The base `styles.css` does not include colors, so importing a flavour is required.
 
 **Available flavours:**
 
 | Flavour    | Light                                       | Dark                                     |
 | ---------- | ------------------------------------------- | ---------------------------------------- |
-| `imperial` | Luxury Cathedral — warm whites and gold     | Immortal Abyssal — deep blacks and gold  |
-| `crimson`  | Crimson Dawn — warm off-whites and deep red | Crimson Noir — near-black with vivid red |
+| `imperial` | Light: Warm whites and gold                 | Dark: Deep blacks and gold               |
+| `crimson`  | Light: Warm off-whites and deep red         | Dark: Near-black with vivid red          |
 
-Import a flavour after `anasthasia/styles` in your stylesheet. Additional flavours can be added by creating a new CSS file with `:root` and `.dark` blocks.
+Import your chosen flavour in your stylesheet after `anasthasia/styles`. You can add custom flavours by creating a new CSS file with `:root` and `.dark` blocks.
 
 ### Transitions
 
-11 named transition utilities tuned for a fast, desktop-native feel: `riseIn`, `riseOut`, `pageFade`, `slideUp`, `slideDown`, `sidebarSlide`, `softCollapse`, `glassCollapse`, `sendPill`, `receivePill`.
+11 transition utilities designed for desktop layouts, including `riseIn`, `riseOut`, `pageFade`, `slideUp`, `slideDown`, `sidebarSlide`, `softCollapse`, `glassCollapse`, `sendPill`, and `receivePill`.
 
 ---
 
@@ -72,9 +72,9 @@ pnpm add github:LuMiSxh/Anasthasia#v0.1.1
 
 ## Usage
 
-### 1. Bootstrap fonts
+### 1. Load fonts
 
-Import once in the root layout — loads Geist Sans and JetBrains Mono from `@fontsource`:
+Import once in your root layout to load Geist Sans and JetBrains Mono from `@fontsource`:
 
 ```svelte
 <script lang="ts">
@@ -97,7 +97,7 @@ In your root stylesheet:
 @import 'anasthasia/flavours/imperial';
 ```
 
-`anasthasia/styles` provides the Tailwind theme tokens, typography rules, and utility classes. The flavour provides all color values. Both imports are required.
+`anasthasia/styles` sets up the Tailwind theme tokens, typography, and utility classes, while the flavour provides the colors. Both imports are required.
 
 ### 3. Use components
 
@@ -186,7 +186,7 @@ The `Version Tag` workflow runs lint, type-check, and build, then commits the bu
 
 ## Component Reference
 
-Full API documentation, design guidelines, and usage examples for all 18 components, stores, transitions, and utility classes are in [COMPONENTS.md](COMPONENTS.md).
+Detailed API documentation, guidelines, and usage examples for all components, stores, and transitions can be found in [COMPONENTS.md](COMPONENTS.md).
 
 ---
 
@@ -198,7 +198,7 @@ MIT — see [LICENSE](LICENSE).
 
 <div align="center">
 
-**Made with passion by LuMiSxh**
+**An open-source project by LuMiSxh**
 
 [GitHub](https://github.com/LuMiSxh/Anasthasia) • [Issues](https://github.com/LuMiSxh/Anasthasia/issues) • [Releases](https://github.com/LuMiSxh/Anasthasia/tags)
 
