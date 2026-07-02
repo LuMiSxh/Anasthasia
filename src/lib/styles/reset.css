@@ -1,0 +1,46 @@
+@layer base {
+	body {
+		@apply bg-anasthasia-bg font-anasthasia-sans text-sm leading-relaxed text-anasthasia-text antialiased;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply leading-tight font-bold text-anasthasia-text;
+	}
+
+	h1 {
+		@apply text-2xl;
+	}
+	h2 {
+		@apply text-xl;
+	}
+	h3 {
+		@apply text-base;
+	}
+	h4,
+	h5,
+	h6 {
+		@apply text-sm;
+	}
+	p {
+		@apply text-sm leading-relaxed text-anasthasia-muted;
+	}
+	small {
+		@apply text-xs leading-relaxed text-anasthasia-muted;
+	}
+	code,
+	pre,
+	samp {
+		@apply font-anasthasia-mono text-anasthasia-text;
+	}
+	a {
+		@apply text-anasthasia-accent underline-offset-3 transition-opacity duration-150 hover:opacity-75;
+	}
+	hr {
+		@apply border-anasthasia-border;
+	}
+}

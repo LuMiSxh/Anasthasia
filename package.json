@@ -1,21 +1,41 @@
 {
 	"name": "anasthasia",
-	"version": "0.1.2",
+	"version": "0.2.0",
+	"description": "Accessible Svelte 5 components and design tokens for desktop-grade applications",
+	"license": "MIT",
+	"author": "LuMiSxh",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/LuMiSxh/Anasthasia.git"
+	},
+	"homepage": "https://github.com/LuMiSxh/Anasthasia#readme",
+	"bugs": "https://github.com/LuMiSxh/Anasthasia/issues",
+	"packageManager": "pnpm@11.9.0",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run prepack",
+		"build": "pnpm run build:demo && pnpm run prepack",
+		"build:demo": "vite build",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync && svelte-package",
-		"prepack": "svelte-kit sync && svelte-package && publint",
+		"package": "svelte-kit sync && svelte-package",
+		"prepare": "pnpm run package",
+		"prepack": "pnpm run package && publint",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:e2e": "playwright test",
+		"test:types": "pnpm run package && tsc -p tests/consumer/tsconfig.json",
+		"verify": "pnpm run lint && pnpm run check && pnpm run test && pnpm run test:types && pnpm run prepack"
 	},
 	"files": [
 		"dist",
 		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
+		"!dist/**/*.spec.*",
+		"CHANGELOG.md",
+		"COMPONENTS.md",
+		"MIGRATION.md"
 	],
 	"sideEffects": [
 		"**/*.css"
@@ -32,13 +52,21 @@
 			"types": "./dist/bootstrap.d.ts",
 			"default": "./dist/bootstrap.js"
 		},
-		"./styles": "./dist/styles.css",
-		"./flavours/imperial": "./dist/flavours/imperial.css",
-		"./flavours/crimson": "./dist/flavours/crimson.css",
-		"./flavours/dusk": "./dist/flavours/dusk.css"
+		"./keyboard": {
+			"types": "./dist/keyboard/index.d.ts",
+			"svelte": "./dist/keyboard/index.js",
+			"default": "./dist/keyboard/index.js"
+		},
+		"./keyboard/styles": "./dist/keyboard/styles.css",
+		"./styles": "./dist/styles/index.css",
+		"./reset": "./dist/styles/reset.css",
+		"./flavours/imperial": "./dist/styles/flavours/imperial.css",
+		"./flavours/crimson": "./dist/styles/flavours/crimson.css",
+		"./flavours/spectrum": "./dist/styles/flavours/spectrum.css"
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0"
+		"svelte": "^5.30.0",
+		"tailwindcss": "^4.0.0"
 	},
 	"dependencies": {
 		"@fontsource/geist-sans": "^5.2.5",
@@ -48,16 +76,21 @@
 	"devDependencies": {
 		"@eslint/compat": "^2.0.4",
 		"@eslint/js": "^10.0.1",
+		"@playwright/test": "^1.61.1",
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.2.2",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/svelte": "^5.4.2",
 		"@types/node": "^22",
+		"axe-core": "^4.12.1",
 		"eslint": "^10.2.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.17.0",
 		"globals": "^17.4.0",
+		"jsdom": "^29.1.1",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.5.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
@@ -65,11 +98,16 @@
 		"svelte": "^5.55.2",
 		"svelte-check": "^4.4.6",
 		"tailwindcss": "^4.2.2",
-		"typescript": "^6.0.2",
+		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.58.1",
-		"vite": "^8.0.7"
+		"vite": "^8.0.7",
+		"vitest": "^4.1.9"
 	},
 	"keywords": [
-		"svelte"
+		"svelte",
+		"components",
+		"design-system",
+		"accessibility",
+		"tailwindcss"
 	]
 }

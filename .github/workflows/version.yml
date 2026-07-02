@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Semver version to create, for example 0.1.0'
+        description: 'Exact semver version, for example 0.2.0'
         required: true
         type: string
 
@@ -15,59 +15,43 @@ jobs:
   tag_and_release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+      - uses: pnpm/action-setup@v6
         with:
-          version: latest
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+          version: 11.9.0
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: 'pnpm'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Validate changelog and prepare release notes
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          test "$(node -p "require('./package.json').version")" = "$VERSION"
+          node scripts/release-notes.mjs "$VERSION" release-notes.md
 
-      - name: Run linting
-        run: pnpm run lint
+      - run: pnpm run verify
+      - run: pnpm run build:demo
+      - run: pnpm pack --dry-run
 
-      - name: Run checks
-        run: pnpm run check
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm run test:e2e
 
-      - name: Build project
-        run: pnpm run build
-
-      - name: Configure Git
+      - name: Tag the verified package
+        env:
+          VERSION: ${{ inputs.version }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
 
-      - name: Update version in package.json
-        run: npm version "${{ inputs.version }}" --no-git-tag-version
-
-      - name: Commit and push tag
-        run: |
-          git add package.json pnpm-lock.yaml
-          git commit -m "chore: release v${{ inputs.version }}"
-          git tag "v${{ inputs.version }}"
-
-          # Safely push the commit back to the branch (e.g., main)
-          git push origin "HEAD:${{ github.ref_name }}"
-
-          # Explicitly push the tag
-          git push origin "v${{ inputs.version }}"
-
-      - name: Create GitHub Release & Auto-Changelog
+      - name: Create GitHub release from changelog
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create "v${{ inputs.version }}" \
-            --title "Release v${{ inputs.version }}" \
-            --generate-notes \
-            --latest
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+        run: gh release create "v$VERSION" --title "Release v$VERSION" --notes-file release-notes.md --latest

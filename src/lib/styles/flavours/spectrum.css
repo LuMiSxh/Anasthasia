@@ -1,0 +1,43 @@
+/* Spectrum — neutral slate surfaces with a blue-to-red spectrum accent */
+:root {
+	--color-anasthasia-bg: #f6f7f9;
+	--color-anasthasia-surface: #ffffff;
+	--color-anasthasia-panel: #eef1f5;
+	--color-anasthasia-border: rgba(15, 23, 42, 0.12);
+	--color-anasthasia-text: #111827;
+	--color-anasthasia-muted: #667085;
+	--color-anasthasia-accent: #2563eb;
+	--color-anasthasia-accent-strong: #1d4ed8;
+	--color-anasthasia-on-accent: #ffffff;
+	--background-image-anasthasia-accent-gradient: linear-gradient(
+		135deg,
+		#2563eb 0%,
+		#7c3aed 50%,
+		#dc2626 100%
+	);
+
+	/* Conventional application radius scale */
+	--radius-anasthasia-sm: 0.375rem;
+	--radius-anasthasia-md: 0.5rem;
+	--radius-anasthasia-lg: 0.75rem;
+	--radius-anasthasia-xl: 1rem;
+	--radius-anasthasia-2xl: 1.25rem;
+}
+
+:root.dark {
+	--color-anasthasia-bg: #0b0d12;
+	--color-anasthasia-surface: #151821;
+	--color-anasthasia-panel: #1c202b;
+	--color-anasthasia-border: rgba(255, 255, 255, 0.1);
+	--color-anasthasia-text: #f8fafc;
+	--color-anasthasia-muted: #a5adbb;
+	--color-anasthasia-accent: #60a5fa;
+	--color-anasthasia-accent-strong: #93c5fd;
+	--color-anasthasia-on-accent: #ffffff;
+	--background-image-anasthasia-accent-gradient: linear-gradient(
+		135deg,
+		#2563eb 0%,
+		#6d28d9 48%,
+		#dc2626 100%
+	);
+}

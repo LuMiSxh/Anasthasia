@@ -1,80 +1,24 @@
-<div align="center">
-
 # Anasthasia
 
-**A Svelte 5 component library and design system for desktop-grade applications**
+Accessible Svelte 5 components, semantic design tokens, and interaction utilities for desktop-grade applications.
 
-Reusable UI primitives, design tokens, flavour theming, and interaction utilities — extracted from Thasia and built to scale.
+Anasthasia 0.2 is intentionally breaking. See [MIGRATION.md](MIGRATION.md) before updating from 0.1.x.
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/github/v/tag/LuMiSxh/Anasthasia)](https://github.com/LuMiSxh/Anasthasia/tags)
-[![Svelte](https://img.shields.io/badge/svelte-5-orange.svg)](https://svelte.dev)
+## Requirements
 
-[Features](#features) • [Installation](#installation) • [Usage](#usage) • [Development](#development) • [Component Reference](COMPONENTS.md)
-
-</div>
-
----
-
-## Features
-
-### Design Tokens
-
-A strict set of semantic CSS variables (`--bg`, `--surface`, `--panel`, `--border`, `--text`, `--muted`, `--accent`, `--accent-strong`) mapped to Tailwind v4 utility classes via `@theme`. Every component is built exclusively against these tokens — no hardcoded colors anywhere.
-
-### Component Library
-
-18 production-ready Svelte 5 components covering the core UI surface:
-
-| Primitives         | Feedback        | Layout         | Keyboard          |
-| ------------------ | --------------- | -------------- | ----------------- |
-| `Button`           | `Alert`         | `Card`         | `Kbd`             |
-| `Input`            | `Badge`         | `Panel`        | `KeyComboDisplay` |
-| `Select`           | `ToastProvider` | `FieldRow`     | `KeyHintBar`      |
-| `Toggle`           | `ProgressBar`   | `SectionLabel` | —                 |
-| `SegmentedControl` | `Dialog`        | `PathDisplay`  | —                 |
-
-### Theming
-
-Light and dark mode via a `.dark` class on `<html>`. The `theme` store manages the toggle and persists the preference in localStorage, with OS-preference fallback. Switching is instant — all color transitions are CSS-driven at 300ms.
-
-### Flavour System
-
-A flavour is a single CSS file that defines both the light (`:root`) and dark (`.dark`) color tokens for a complete visual personality. `styles.css` ships no colors — a flavour import is required.
-
-**Available flavours:**
-
-| Flavour    | Light                                       | Dark                                     |
-| ---------- | ------------------------------------------- | ---------------------------------------- |
-| `imperial` | Luxury Cathedral — warm whites and gold     | Immortal Abyssal — deep blacks and gold  |
-| `crimson`  | Crimson Dawn — warm off-whites and deep red | Crimson Noir — near-black with vivid red |
-
-Import a flavour after `anasthasia/styles` in your stylesheet. Additional flavours can be added by creating a new CSS file with `:root` and `.dark` blocks.
-
-### Transitions
-
-11 named transition utilities tuned for a fast, desktop-native feel: `riseIn`, `riseOut`, `pageFade`, `slideUp`, `slideDown`, `sidebarSlide`, `softCollapse`, `glassCollapse`, `sendPill`, `receivePill`.
-
----
+- Svelte 5.30 or newer
+- Tailwind CSS 4
+- A modern browser or WebView with native `<dialog>` support
 
 ## Installation
 
 ```sh
-pnpm add github:LuMiSxh/Anasthasia#v0.1.1
+pnpm add github:LuMiSxh/Anasthasia#v0.2.0
 ```
 
-### Prerequisites
+## Setup
 
-- [Svelte](https://svelte.dev) 5+
-- [Tailwind CSS](https://tailwindcss.com) v4
-
----
-
-## Usage
-
-### 1. Bootstrap fonts
-
-Import once in the root layout — loads Geist Sans and JetBrains Mono from `@fontsource`:
+Load the optional bundled fonts from your root layout:
 
 ```svelte
 <script lang="ts">
@@ -87,9 +31,7 @@ Import once in the root layout — loads Geist Sans and JetBrains Mono from `@fo
 {@render children()}
 ```
 
-### 2. Import base styles and a flavour
-
-In your root stylesheet:
+Load Tailwind, Anasthasia's component tokens, and one flavour:
 
 ```css
 @import 'tailwindcss';
@@ -97,109 +39,134 @@ In your root stylesheet:
 @import 'anasthasia/flavours/imperial';
 ```
 
-`anasthasia/styles` provides the Tailwind theme tokens, typography rules, and utility classes. The flavour provides all color values. Both imports are required.
+`anasthasia/styles` contains tokens and component utilities but does not style global HTML elements. Applications that want Anasthasia's typography defaults can opt in:
 
-### 3. Use components
+```css
+@import 'anasthasia/reset';
+```
+
+## Usage
 
 ```svelte
 <script lang="ts">
-	import { Button, Card, Input, Select, Dialog } from 'anasthasia';
+	import { Button, Input, Select, Panel } from 'anasthasia';
+
+	let name = $state('');
+	let format = $state<'avif' | 'webp'>('avif');
 </script>
 
-<Card>
-	<Input label="Name" placeholder="Enter your name" />
-	<Select
-		label="Role"
-		options={[
-			{ value: 'admin', label: 'Admin' },
-			{ value: 'user', label: 'User' }
-		]}
-		bind:value={role}
-	/>
-	<Button variant="primary">Save</Button>
-</Card>
+<Panel title="Export">
+	<div class="flex flex-col gap-4">
+		<Input label="Name" bind:value={name} />
+		<Select
+			label="Format"
+			options={[
+				{ value: 'avif', label: 'AVIF' },
+				{ value: 'webp', label: 'WebP' }
+			]}
+			bind:value={format}
+		/>
+		<Button variant="primary">Export</Button>
+	</div>
+</Panel>
 ```
 
-### 4. Theme toggle
+## Theme
+
+The store supports explicit light/dark modes and live system preference tracking:
 
 ```svelte
 <script lang="ts">
-	import { theme } from 'anasthasia';
-</script>
+	import { onMount } from 'svelte';
+	import { theme, type ThemeMode } from 'anasthasia';
 
-<button onclick={() => theme.toggle()}>
-	{theme.current === 'dark' ? 'Light mode' : 'Dark mode'}
-</button>
+	onMount(() => {
+		theme.init('system');
+		return () => theme.destroy();
+	});
+
+	function setTheme(mode: ThemeMode) {
+		theme.setMode(mode);
+	}
+</script>
 ```
 
-### Available exports
+Read `theme.mode` for the selected mode and `theme.isDark` for the resolved palette.
 
-| Export                         | Contents                                                                                                                         |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| `anasthasia`                   | All 18 components, stores (`theme`, `toast`, `uiPrefs`, `keyHint`), `keyboard` manager, all transitions, `dropdownPortal` action |
-| `anasthasia/bootstrap`         | Font imports (Geist Sans, JetBrains Mono)                                                                                        |
-| `anasthasia/styles`            | Tailwind v4 theme tokens, typography, utilities — no colors                                                                      |
-| `anasthasia/flavours/imperial` | Imperial flavour (light + dark color tokens)                                                                                     |
+## Public surface
 
----
+- Controls: `Button`, `IconButton`, `Input`, `Textarea`, `Select`, `Toggle`, `SegmentedControl`
+- Feedback: `Alert`, `Badge`, `ProgressBar`, `Spinner`, `ToastProvider`, `EmptyState`
+- Layout: `Card`, `InteractiveCard`, `LinkCard`, `Panel`, `FieldRow`, `Dialog`
+- Supporting UI: `PathDisplay`, `SectionLabel`, and `Tooltip`
+- Runtime utilities: `theme`, `toast`, transitions, `dropdownPortal`, and `tooltipPortal`
+- Optional `anasthasia/keyboard` entrypoint: `keyboard`, `Kbd`, `KeyComboDisplay`, `KeyHintBar`, and key-hint actions/store
+- Public TypeScript types for options, variants, theme modes, toast options, and actions
+
+Full component and API documentation is in [COMPONENTS.md](COMPONENTS.md).
+
+Keyboard shortcuts and hint UI are intentionally excluded from the main entrypoint. Applications that need them opt in explicitly:
+
+```ts
+import { keyboard, KeyHintBar } from 'anasthasia/keyboard';
+```
+
+When using the optional keyboard components, also expose their Tailwind sources:
+
+```css
+@import 'anasthasia/keyboard/styles';
+```
+
+Finished applications do not need to mount `KeyHintBar`; it is only a presentation helper for products that deliberately expose shortcut hints.
+
+## CSS contract
+
+All public tokens are namespaced. Flavours may override them without changing global Tailwind radius or font tokens:
+
+```css
+--color-anasthasia-bg
+--color-anasthasia-surface
+--color-anasthasia-panel
+--color-anasthasia-border
+--color-anasthasia-text
+--color-anasthasia-muted
+--color-anasthasia-accent
+--color-anasthasia-accent-strong
+--color-anasthasia-on-accent
+--color-anasthasia-{info|success|warning|danger}
+--color-anasthasia-{info|success|warning|danger}-surface
+--color-anasthasia-{info|success|warning|danger}-border
+--radius-anasthasia-{sm|md|lg|xl|2xl}
+--font-anasthasia-{sans|mono}
+--background-image-anasthasia-accent-gradient
+```
+
+Available flavours are:
+
+- `imperial`: the existing high-contrast gold and black identity.
+- `crimson`: neutral application surfaces with a direct red accent.
+- `spectrum`: neutral slate surfaces with a blue-to-violet-to-red primary gradient.
+
+Neutral accessible values are built into `anasthasia/styles`, so a flavour is optional.
 
 ## Development
 
-### Prerequisites
-
-- [Node.js](https://nodejs.org) 22+
-- [pnpm](https://pnpm.io)
-
-### Setup
-
 ```sh
-# Clone the repository
-git clone https://github.com/LuMiSxh/Anasthasia.git
-cd Anasthasia
-
-# Install dependencies
 pnpm install
-
-# Run dev server
 pnpm run dev
-
-# Type check
-pnpm run check
-
-# Build package
+pnpm run verify
+pnpm run test:e2e
 pnpm run build
 ```
 
-### Adding a flavour
+`verify` runs formatting/lint checks, Svelte diagnostics, unit/component tests, consumer type tests, package generation, and Publint. Browser tests use Playwright and Axe.
 
-Create `src/lib/flavours/<name>.css` with `:root` and `.dark` blocks using the eight token variables, then add an export entry to `package.json`:
+The development server exposes a component laboratory at `/`. Every public component has its own `/components/<name>` route: combinable APIs use generated prop matrices, while overlays, timers, portals, and composition primitives use focused scenario pages.
 
-```json
-"./flavours/<name>": "./dist/flavours/<name>.css"
-```
+## Versioning
 
-### Versioning
-
-The `Version Tag` workflow runs lint, type-check, and build, then commits the bumped version and creates a `vX.Y.Z` git tag. Trigger it manually via GitHub Actions with a semver input.
-
----
-
-## Component Reference
-
-Full API documentation, design guidelines, and usage examples for all 18 components, stores, transitions, and utility classes are in [COMPONENTS.md](COMPONENTS.md).
-
----
+Until 1.0, patch releases remain API-compatible within a minor line. Breaking changes require a new minor version and a migration section in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
-
----
-
-<div align="center">
-
-**Made with passion by LuMiSxh**
-
-[GitHub](https://github.com/LuMiSxh/Anasthasia) • [Issues](https://github.com/LuMiSxh/Anasthasia/issues) • [Releases](https://github.com/LuMiSxh/Anasthasia/tags)
-
-</div>
+MIT. See [LICENSE](LICENSE).

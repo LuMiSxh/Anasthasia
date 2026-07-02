@@ -12,6 +12,16 @@ export const easing = {
 	standard: cubicOut
 } as const;
 
+export function prefersReducedMotion(): boolean {
+	return (
+		typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+	);
+}
+
+function motionDuration(value: number): number {
+	return prefersReducedMotion() ? 0 : value;
+}
+
 /**
  * Sliding pill crossfade — use [sendPill, receivePill] for any
  * "active indicator moves between options" pattern (segmented controls,
@@ -23,32 +33,41 @@ export const easing = {
  *   {/if}
  */
 export const [sendPill, receivePill] = crossfade({
-	duration: duration.base,
+	duration: () => motionDuration(duration.base),
 	easing: easing.standard,
-	fallback: (node) => scale(node, { duration: duration.fast, easing: easing.standard })
+	fallback: (node) =>
+		scale(node, { duration: motionDuration(duration.fast), easing: easing.standard })
 });
 
 /** Sidebar panel slide in/out on x-axis */
 export const sidebarSlide = (node: Element) =>
-	slide(node, { axis: 'x', duration: duration.base, easing: easing.standard });
+	slide(node, { axis: 'x', duration: motionDuration(duration.base), easing: easing.standard });
 
 /** Standard page-level fade */
 export const pageFade = (node: Element) =>
-	fade(node, { duration: duration.base, easing: easing.standard });
+	fade(node, { duration: motionDuration(duration.base), easing: easing.standard });
 
 /** Slide up into view — good for toasts, dropdowns, step content */
 export const slideUp = (node: Element, params?: { duration?: number }) =>
-	fly(node, { y: 8, duration: params?.duration ?? duration.base, easing: easing.standard });
+	fly(node, {
+		y: 8,
+		duration: motionDuration(params?.duration ?? duration.base),
+		easing: easing.standard
+	});
 
 /** Slide down — good for panels expanding downward */
 export const slideDown = (node: Element, params?: { duration?: number }) =>
-	fly(node, { y: -8, duration: params?.duration ?? duration.base, easing: easing.standard });
+	fly(node, {
+		y: -8,
+		duration: motionDuration(params?.duration ?? duration.base),
+		easing: easing.standard
+	});
 
 /** Anasthasia rise — default entrance for panels, alerts, popovers, and step content. */
 export function riseIn(node: Element, params: { duration?: number; y?: number } = {}) {
 	return fly(node, {
 		y: params.y ?? 8,
-		duration: params.duration ?? duration.base,
+		duration: motionDuration(params.duration ?? duration.base),
 		easing: easing.standard
 	});
 }
@@ -57,7 +76,7 @@ export function riseIn(node: Element, params: { duration?: number; y?: number } 
 export function riseOut(node: Element, params: { duration?: number; y?: number } = {}) {
 	return fly(node, {
 		y: params.y ?? 8,
-		duration: params.duration ?? duration.base,
+		duration: motionDuration(params.duration ?? duration.base),
 		easing: easing.standard
 	});
 }
@@ -72,7 +91,7 @@ export function softCollapse(node: Element, params: { duration?: number } = {}) 
 	const marginBottom = parseFloat(style.marginBottom);
 
 	return {
-		duration: params.duration ?? duration.base,
+		duration: motionDuration(params.duration ?? duration.base),
 		css: (t: number) => {
 			const e = easing.standard(t);
 			return `
@@ -95,7 +114,7 @@ export function glassCollapse(node: Element, params: { duration?: number } = {})
 	const marginRight = parseFloat(style.marginRight);
 
 	return {
-		duration: params.duration ?? duration.base,
+		duration: motionDuration(params.duration ?? duration.base),
 		css: (t: number) => {
 			const e = easing.standard(t);
 			return `

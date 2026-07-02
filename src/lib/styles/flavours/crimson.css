@@ -1,0 +1,43 @@
+/* Crimson — neutral application chrome with a direct red accent */
+:root {
+	--color-anasthasia-bg: #f7f7f8;
+	--color-anasthasia-surface: #ffffff;
+	--color-anasthasia-panel: #f0f0f2;
+	--color-anasthasia-border: rgba(24, 24, 27, 0.11);
+	--color-anasthasia-text: #18181b;
+	--color-anasthasia-muted: #686872;
+	--color-anasthasia-accent: #dc2626;
+	--color-anasthasia-accent-strong: #b91c1c;
+	--color-anasthasia-on-accent: #ffffff;
+	--background-image-anasthasia-accent-gradient: linear-gradient(
+		135deg,
+		#dc2626 0%,
+		#b91c1c 52%,
+		#991b1b 100%
+	);
+
+	/* Conventional application radius scale */
+	--radius-anasthasia-sm: 0.375rem;
+	--radius-anasthasia-md: 0.5rem;
+	--radius-anasthasia-lg: 0.625rem;
+	--radius-anasthasia-xl: 0.875rem;
+	--radius-anasthasia-2xl: 1.125rem;
+}
+
+:root.dark {
+	--color-anasthasia-bg: #0c0c0e;
+	--color-anasthasia-surface: #17171a;
+	--color-anasthasia-panel: #202024;
+	--color-anasthasia-border: rgba(255, 255, 255, 0.1);
+	--color-anasthasia-text: #fafafa;
+	--color-anasthasia-muted: #a6a6af;
+	--color-anasthasia-accent: #fb7185;
+	--color-anasthasia-accent-strong: #fda4af;
+	--color-anasthasia-on-accent: #ffffff;
+	--background-image-anasthasia-accent-gradient: linear-gradient(
+		135deg,
+		#e11d48 0%,
+		#be123c 48%,
+		#881337 100%
+	);
+}
