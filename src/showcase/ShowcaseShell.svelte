@@ -4,6 +4,7 @@
 	import imperialUrl from '$lib/styles/flavours/imperial.css?url';
 	import crimsonUrl from '$lib/styles/flavours/crimson.css?url';
 	import spectrumUrl from '$lib/styles/flavours/spectrum.css?url';
+	import hypergryphUrl from '$lib/styles/flavours/hypergryph.css?url';
 	import { theme } from '$lib/runtime/theme.svelte.js';
 	import Badge from '$lib/components/Badge.svelte';
 	import Select from '$lib/components/Select.svelte';
@@ -11,7 +12,7 @@
 	import Toggle from '$lib/components/Toggle.svelte';
 	import { showcaseCategories, showcaseEntries } from './catalog.js';
 
-	type Flavour = 'imperial' | 'crimson' | 'spectrum';
+	type Flavour = 'imperial' | 'crimson' | 'spectrum' | 'hypergryph';
 
 	let {
 		title,
@@ -23,15 +24,17 @@
 	const flavourUrls: Record<Flavour, string> = {
 		imperial: imperialUrl,
 		crimson: crimsonUrl,
-		spectrum: spectrumUrl
+		spectrum: spectrumUrl,
+		hypergryph: hypergryphUrl
 	};
 	const flavourOptions = [
 		{ value: 'imperial', label: 'Imperial' },
 		{ value: 'crimson', label: 'Crimson' },
-		{ value: 'spectrum', label: 'Spectrum' }
+		{ value: 'spectrum', label: 'Spectrum' },
+		{ value: 'hypergryph', label: 'Hypergryph' }
 	] satisfies Array<{ value: Flavour; label: string }>;
 
-	let flavour = $state<Flavour>('imperial');
+	let flavour = $state<Flavour>('hypergryph');
 	let hydrated = $state(false);
 
 	function syncUrl() {
@@ -50,7 +53,8 @@
 		if (
 			requestedFlavour === 'imperial' ||
 			requestedFlavour === 'crimson' ||
-			requestedFlavour === 'spectrum'
+			requestedFlavour === 'spectrum' ||
+			requestedFlavour === 'hypergryph'
 		) {
 			flavour = requestedFlavour;
 		}
@@ -96,7 +100,7 @@
 					syncUrl();
 				}}
 			/>
-			<Badge variant="accent">v0.2.0</Badge>
+			<Badge variant="accent">v0.2.1</Badge>
 		</div>
 	</header>
 

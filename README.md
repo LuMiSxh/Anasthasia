@@ -44,7 +44,7 @@ Requirements:
 Install the current release from GitHub:
 
 ```sh
-pnpm add github:LuMiSxh/Anasthasia#v0.2.0
+pnpm add github:LuMiSxh/Anasthasia#v0.2.1
 ```
 
 Load the optional bundled fonts from the root layout:
@@ -121,6 +121,7 @@ Available flavours are:
 - `imperial`: high-contrast gold and black
 - `crimson`: neutral surfaces with a red accent
 - `spectrum`: slate surfaces with a blue-to-violet-to-red gradient
+- `hypergryph`: dark-industrial black and graphite surfaces with cyan interaction and hazard-yellow state tokens
 
 Neutral accessible defaults are built into `anasthasia/styles`, so using a flavour is optional. All public color, radius, font, and gradient tokens use the `anasthasia` namespace; see [COMPONENTS.md](COMPONENTS.md) for the complete contract.
 

@@ -1,6 +1,6 @@
 {
 	"name": "anasthasia",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Accessible Svelte 5 components and design tokens for desktop-grade applications",
 	"license": "MIT",
 	"author": "LuMiSxh",
@@ -62,7 +62,8 @@
 		"./reset": "./dist/styles/reset.css",
 		"./flavours/imperial": "./dist/styles/flavours/imperial.css",
 		"./flavours/crimson": "./dist/styles/flavours/crimson.css",
-		"./flavours/spectrum": "./dist/styles/flavours/spectrum.css"
+		"./flavours/spectrum": "./dist/styles/flavours/spectrum.css",
+		"./flavours/hypergryph": "./dist/styles/flavours/hypergryph.css"
 	},
 	"peerDependencies": {
 		"svelte": "^5.30.0",

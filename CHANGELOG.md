@@ -2,6 +2,12 @@
 
 Notable changes are documented here. Before 1.0, patch releases are compatible within their minor line; breaking changes increment the minor version.
 
+## [0.2.1] - 2026-07-25
+
+### Added
+
+- Added the `anasthasia/flavours/hypergryph` dark-industrial flavour with black/graphite surfaces, cyan interaction tokens, hazard-yellow state tokens, and tight tactical geometry.
+
 ## [0.2.0] - 2026-07-02
 
 ### Added

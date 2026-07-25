@@ -1,0 +1,68 @@
+/* Hypergryph — dark-industrial utility chrome.
+   Black and graphite carry structure; cyan communicates interaction and
+   information, while hazard yellow is reserved for urgency and primary calls. */
+:root {
+	--color-anasthasia-bg: #f4f5f5;
+	--color-anasthasia-surface: #ffffff;
+	--color-anasthasia-panel: #e9ecec;
+	--color-anasthasia-border: #c6c9ce;
+	--color-anasthasia-text: #101214;
+	--color-anasthasia-muted: #585858;
+	--color-anasthasia-accent: #06bbff;
+	--color-anasthasia-accent-strong: #008fc7;
+	--color-anasthasia-on-accent: #000000;
+	--color-anasthasia-overlay: rgb(0 0 0 / 0.68);
+	--color-anasthasia-info: #06bbff;
+	--color-anasthasia-info-surface: #e5f8ff;
+	--color-anasthasia-info-border: #18d1ff;
+	--color-anasthasia-success: #008f63;
+	--color-anasthasia-success-surface: #e2fff4;
+	--color-anasthasia-success-border: #00ffa2;
+	--color-anasthasia-warning: #625f00;
+	--color-anasthasia-warning-surface: #fffed6;
+	--color-anasthasia-warning-border: #fffa00;
+	--color-anasthasia-danger: #b0243b;
+	--color-anasthasia-danger-surface: #ffecef;
+	--color-anasthasia-danger-border: #b0243b;
+	--font-anasthasia-sans: 'Source Han Sans', 'Noto Sans', system-ui, sans-serif;
+	--font-anasthasia-mono: 'JetBrains Mono', 'SFMono-Regular', monospace;
+	--radius-anasthasia-sm: 2px;
+	--radius-anasthasia-md: 4px;
+	--radius-anasthasia-lg: 8px;
+	--radius-anasthasia-xl: 12px;
+	--radius-anasthasia-2xl: 16px;
+	--background-image-anasthasia-accent-gradient: linear-gradient(90deg, #18d1ff, #06bbff);
+}
+
+:root.dark {
+	--color-anasthasia-bg: #000000;
+	--color-anasthasia-surface: #1d1f20;
+	--color-anasthasia-panel: #242424;
+	--color-anasthasia-border: #2e3238;
+	--color-anasthasia-text: #ffffff;
+	--color-anasthasia-muted: #b2b2b2;
+	--color-anasthasia-accent: #18d1ff;
+	--color-anasthasia-accent-strong: #06bbff;
+	--color-anasthasia-on-accent: #000000;
+	--color-anasthasia-overlay: rgb(0 0 0 / 0.68);
+	--color-anasthasia-info: #18d1ff;
+	--color-anasthasia-info-surface: #102d35;
+	--color-anasthasia-info-border: #06bbff;
+	--color-anasthasia-success: #00ffa2;
+	--color-anasthasia-success-surface: #0b3026;
+	--color-anasthasia-success-border: #00ffa2;
+	--color-anasthasia-warning: #fffa00;
+	--color-anasthasia-warning-surface: #383500;
+	--color-anasthasia-warning-border: #fffa00;
+	--color-anasthasia-danger: #ff1aac;
+	--color-anasthasia-danger-surface: #35102b;
+	--color-anasthasia-danger-border: #ff1aac;
+	--font-anasthasia-sans: 'Source Han Sans', 'Noto Sans', system-ui, sans-serif;
+	--font-anasthasia-mono: 'JetBrains Mono', 'SFMono-Regular', monospace;
+	--radius-anasthasia-sm: 2px;
+	--radius-anasthasia-md: 4px;
+	--radius-anasthasia-lg: 8px;
+	--radius-anasthasia-xl: 12px;
+	--radius-anasthasia-2xl: 16px;
+	--background-image-anasthasia-accent-gradient: linear-gradient(90deg, #18d1ff, #06bbff);
+}
