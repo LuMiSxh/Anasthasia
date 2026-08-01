@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Exact semver version, for example 0.2.0'
+        description: 'Exact semver version, for example 0.2.0 or v0.2.0'
         required: true
         type: string
 
@@ -27,9 +27,12 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
 
-      - name: Validate changelog and prepare release notes
+      - name: Normalize version input
         env:
-          VERSION: ${{ inputs.version }}
+          RAW_VERSION: ${{ inputs.version }}
+        run: echo "VERSION=${RAW_VERSION#v}" >> "$GITHUB_ENV"
+
+      - name: Validate changelog and prepare release notes
         run: |
           test "$(node -p "require('./package.json').version")" = "$VERSION"
           node scripts/release-notes.mjs "$VERSION" release-notes.md
@@ -42,8 +45,6 @@ jobs:
       - run: pnpm run test:e2e
 
       - name: Tag the verified package
-        env:
-          VERSION: ${{ inputs.version }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -53,5 +54,4 @@ jobs:
       - name: Create GitHub release from changelog
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ inputs.version }}
         run: gh release create "v$VERSION" --title "Release v$VERSION" --notes-file release-notes.md --latest

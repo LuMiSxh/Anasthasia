@@ -2,6 +2,17 @@
 
 Notable changes are documented here. Before 1.0, patch releases are compatible within their minor line; breaking changes increment the minor version.
 
+## [0.2.2] - 2026-08-01
+
+### Changed
+
+- Refined the Hypergryph flavour around its cross-brand structure: editorial light and cinematic dark surfaces, one Arknights-cyan identity accent, and a tighter 2–8px radius scale.
+- Restored semantic success, warning, and danger palettes instead of reusing Endfield and Terra Historicus identity colors.
+
+### Fixed
+
+- Corrected light-mode primary-action contrast with white text on the deep-cyan action gradient.
+
 ## [0.2.1] - 2026-07-25
 
 ### Added

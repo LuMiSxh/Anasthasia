@@ -194,7 +194,7 @@
 {:else if entry.slug === 'badge'}
 	<PropMatrix rows={['Status', 'Version']} columns={badgeVariants} cornerLabel="Content / variant">
 		{#snippet children(content, variant)}
-			<Badge variant={variant as BadgeVariant}>{content === 'Version' ? 'v0.2.1' : variant}</Badge>
+			<Badge variant={variant as BadgeVariant}>{content === 'Version' ? 'v0.2.2' : variant}</Badge>
 		{/snippet}
 	</PropMatrix>
 {:else if entry.slug === 'progress-bar'}

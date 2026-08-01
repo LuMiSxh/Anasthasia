@@ -100,7 +100,7 @@
 					syncUrl();
 				}}
 			/>
-			<Badge variant="accent">v0.2.1</Badge>
+			<Badge variant="accent">v0.2.2</Badge>
 		</div>
 	</header>
 

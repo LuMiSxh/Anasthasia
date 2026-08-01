@@ -4,7 +4,7 @@ import { test } from '@playwright/test';
 import { showcaseEntries } from '../src/showcase/catalog.js';
 
 const enabled = process.env.SHOWCASE_AUDIT === '1';
-const flavours = ['imperial', 'crimson', 'spectrum'] as const;
+const flavours = ['imperial', 'crimson', 'spectrum', 'hypergryph'] as const;
 const modes = ['light', 'dark'] as const;
 
 test.skip(!enabled, 'Set SHOWCASE_AUDIT=1 to capture the full visual audit.');

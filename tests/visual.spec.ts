@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-const flavours = ['Imperial', 'Crimson', 'Spectrum'] as const;
+const flavours = ['Imperial', 'Crimson', 'Spectrum', 'Hypergryph'] as const;
 const modes = ['light', 'dark'] as const;
 
 test.describe.configure({ mode: 'serial' });
@@ -33,7 +33,7 @@ for (const flavour of flavours) {
 	}
 }
 
-for (const flavour of ['imperial', 'spectrum'] as const) {
+for (const flavour of ['imperial', 'spectrum', 'hypergryph'] as const) {
 	for (const mode of modes) {
 		test(`${flavour} Button matrix ${mode} visual baseline`, async ({ page }, testInfo) => {
 			testInfo.snapshotSuffix = '';
