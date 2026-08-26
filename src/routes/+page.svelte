@@ -16,7 +16,7 @@
 					{#each showcaseEntries.filter((entry) => entry.category === category) as entry (entry.slug)}
 						<a
 							href={resolve('/components/[slug]', { slug: entry.slug })}
-							class="group rounded-anasthasia-xl border border-anasthasia-border bg-anasthasia-surface p-4 text-anasthasia-text no-underline transition-colors hover:border-anasthasia-accent/50 hover:opacity-100"
+							class="group rounded-anasthasia-xl border border-anasthasia-divider bg-anasthasia-surface p-[var(--padding-anasthasia-container)] text-anasthasia-text no-underline transition-colors hover:border-anasthasia-accent/50 hover:opacity-100"
 						>
 							<div class="flex items-center justify-between gap-3">
 								<h3 class="font-bold">{entry.name}</h3>

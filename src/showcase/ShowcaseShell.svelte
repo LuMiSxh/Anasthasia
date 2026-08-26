@@ -2,9 +2,8 @@
 	import { onMount, type Snippet } from 'svelte';
 	import { resolve } from '$app/paths';
 	import imperialUrl from '$lib/styles/flavours/imperial.css?url';
-	import crimsonUrl from '$lib/styles/flavours/crimson.css?url';
-	import spectrumUrl from '$lib/styles/flavours/spectrum.css?url';
 	import hypergryphUrl from '$lib/styles/flavours/hypergryph.css?url';
+	import bundUrl from '$lib/styles/flavours/bund.css?url';
 	import { theme } from '$lib/runtime/theme.svelte.js';
 	import Badge from '$lib/components/Badge.svelte';
 	import Select from '$lib/components/Select.svelte';
@@ -12,7 +11,7 @@
 	import Toggle from '$lib/components/Toggle.svelte';
 	import { showcaseCategories, showcaseEntries } from './catalog.js';
 
-	type Flavour = 'imperial' | 'crimson' | 'spectrum' | 'hypergryph';
+	type Flavour = 'imperial' | 'hypergryph' | 'bund';
 
 	let {
 		title,
@@ -23,15 +22,13 @@
 
 	const flavourUrls: Record<Flavour, string> = {
 		imperial: imperialUrl,
-		crimson: crimsonUrl,
-		spectrum: spectrumUrl,
-		hypergryph: hypergryphUrl
+		hypergryph: hypergryphUrl,
+		bund: bundUrl
 	};
 	const flavourOptions = [
 		{ value: 'imperial', label: 'Imperial' },
-		{ value: 'crimson', label: 'Crimson' },
-		{ value: 'spectrum', label: 'Spectrum' },
-		{ value: 'hypergryph', label: 'Hypergryph' }
+		{ value: 'hypergryph', label: 'Hypergryph' },
+		{ value: 'bund', label: 'Bund' }
 	] satisfies Array<{ value: Flavour; label: string }>;
 
 	let flavour = $state<Flavour>('hypergryph');
@@ -52,9 +49,8 @@
 		const requestedMode = params.get('mode');
 		if (
 			requestedFlavour === 'imperial' ||
-			requestedFlavour === 'crimson' ||
-			requestedFlavour === 'spectrum' ||
-			requestedFlavour === 'hypergryph'
+			requestedFlavour === 'hypergryph' ||
+			requestedFlavour === 'bund'
 		) {
 			flavour = requestedFlavour;
 		}

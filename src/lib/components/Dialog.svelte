@@ -89,7 +89,7 @@
 	aria-labelledby={title ? titleId : undefined}
 	aria-describedby={description ? descriptionId : undefined}
 	aria-label={!title ? ariaLabel : undefined}
-	class="anasthasia-dialog m-auto max-h-[calc(100dvh-2rem)] w-[min(32rem,calc(100vw-2rem))] overflow-hidden rounded-anasthasia-xl border border-anasthasia-border bg-anasthasia-surface p-0 text-anasthasia-text shadow-2xl {className}"
+	class="anasthasia-dialog m-auto max-h-[calc(100dvh-2rem)] w-[min(32rem,calc(100vw-2rem))] overflow-hidden rounded-anasthasia-xl border border-anasthasia-border bg-anasthasia-surface p-0 text-anasthasia-text shadow-[var(--shadow-anasthasia-dialog)] {className}"
 >
 	<div class="flex max-h-[calc(100dvh-2rem)] flex-col">
 		{#if title || description}

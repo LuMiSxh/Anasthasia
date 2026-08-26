@@ -2,6 +2,21 @@
 
 Notable changes are documented here. Before 1.0, patch releases are compatible within their minor line; breaking changes increment the minor version.
 
+## [0.2.3] - 2026-08-26
+
+### Added
+
+- Added the `bund` flavour, informed by current Bundesregierung, ministry, and Bundesportal surfaces rather than treating KERN as a universal federal visual identity.
+- Added semantic control-size, control-type, container-spacing, divider, elevation, interaction-duration, and active-transform tokens.
+
+### Changed
+
+- Updated Imperial to use the new interaction and elevation tokens while preserving its gold-and-black identity.
+
+### Removed
+
+- Removed the `crimson` and `spectrum` flavours and package exports.
+
 ## [0.2.2] - 2026-08-01
 
 ### Changed

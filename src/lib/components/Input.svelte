@@ -33,7 +33,7 @@
 		bind:value
 		aria-invalid={error ? 'true' : undefined}
 		aria-describedby={error || hint ? messageId : undefined}
-		class="w-full rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-bg px-3 py-1.5 font-anasthasia-sans text-sm text-anasthasia-text transition-colors duration-150 outline-none placeholder:text-anasthasia-muted hover:border-anasthasia-accent/40 focus:border-anasthasia-accent focus:ring-1 focus:ring-anasthasia-accent disabled:opacity-40 {error
+		class="h-[var(--height-anasthasia-control-md)] w-full rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-bg px-3 font-anasthasia-sans text-[length:var(--font-size-anasthasia-control)] text-anasthasia-text transition-colors duration-[var(--duration-anasthasia-interaction)] outline-none placeholder:text-anasthasia-muted hover:border-anasthasia-accent/40 focus:border-anasthasia-accent focus:ring-1 focus:ring-anasthasia-accent disabled:opacity-40 {error
 			? 'border-anasthasia-danger-border bg-anasthasia-danger-surface'
 			: ''}"
 		{...rest}

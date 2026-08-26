@@ -8,7 +8,8 @@
 
 	let { class: className = '', children }: Props = $props();
 
-	const base = 'bg-anasthasia-surface border border-anasthasia-border rounded-anasthasia-xl p-4';
+	const base =
+		'bg-anasthasia-surface border border-anasthasia-divider rounded-anasthasia-xl p-[var(--padding-anasthasia-container)]';
 </script>
 
 <div class="{base} {className}">

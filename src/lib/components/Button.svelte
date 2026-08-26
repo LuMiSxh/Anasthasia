@@ -23,21 +23,20 @@
 	}: Props = $props();
 
 	const base =
-		'inline-flex items-center justify-center gap-2 font-bold rounded-anasthasia-lg border transition-all duration-150 select-none cursor-pointer ' +
-		'active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-anasthasia-accent focus-visible:ring-offset-2 focus-visible:ring-offset-anasthasia-surface ' +
+		'inline-flex items-center justify-center gap-2 font-anasthasia-control font-bold rounded-anasthasia-lg border transition-all duration-[var(--duration-anasthasia-interaction)] select-none cursor-pointer ' +
+		'active:translate-y-[var(--translate-anasthasia-active)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-anasthasia-accent focus-visible:ring-offset-2 focus-visible:ring-offset-anasthasia-surface ' +
 		'disabled:opacity-40 disabled:pointer-events-none';
 
 	const sizes: Record<ControlSize, string> = {
-		sm: 'px-3 py-1 text-xs',
-		md: 'px-4 py-1.5 text-sm',
-		lg: 'px-6 py-2 text-sm'
+		sm: 'h-[var(--height-anasthasia-control-sm)] px-[var(--padding-inline-anasthasia-control-sm)] text-[length:var(--font-size-anasthasia-control-sm)]',
+		md: 'h-[var(--height-anasthasia-control-md)] px-[var(--padding-inline-anasthasia-control-md)] text-[length:var(--font-size-anasthasia-control)]',
+		lg: 'h-[var(--height-anasthasia-control-lg)] px-[var(--padding-inline-anasthasia-control-lg)] text-[length:var(--font-size-anasthasia-control)]'
 	};
 
 	const variants: Record<ButtonVariant, string> = {
-		primary:
-			'anasthasia-primary-action text-anasthasia-on-accent hover:brightness-105 active:shadow-none',
+		primary: 'anasthasia-primary-action text-anasthasia-on-accent active:shadow-none',
 		secondary:
-			'bg-anasthasia-bg border-anasthasia-border text-anasthasia-text ' +
+			'bg-anasthasia-bg border-anasthasia-action-secondary-border text-anasthasia-action-secondary ' +
 			'hover:border-anasthasia-accent/50 hover:text-anasthasia-text active:shadow-none',
 		ghost:
 			'border-transparent bg-transparent text-anasthasia-muted ' +

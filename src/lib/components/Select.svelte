@@ -174,7 +174,7 @@
 				query = event.currentTarget.value;
 			}}
 			onkeydown={handleKeydown}
-			class="w-full rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-bg px-3 py-1.5 font-anasthasia-sans text-sm text-anasthasia-text outline-none placeholder:text-anasthasia-muted hover:border-anasthasia-accent/40 focus:border-anasthasia-accent focus:ring-1 focus:ring-anasthasia-accent disabled:opacity-40 {error
+			class="h-[var(--height-anasthasia-control-md)] w-full rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-bg px-3 font-anasthasia-sans text-[length:var(--font-size-anasthasia-control)] text-anasthasia-text outline-none placeholder:text-anasthasia-muted hover:border-anasthasia-accent/40 focus:border-anasthasia-accent focus:ring-1 focus:ring-anasthasia-accent disabled:opacity-40 {error
 				? 'border-anasthasia-danger-border bg-anasthasia-danger-surface'
 				: ''}"
 		/>
@@ -193,7 +193,7 @@
 			{disabled}
 			onclick={() => (open ? close() : openDropdown())}
 			onkeydown={handleKeydown}
-			class="flex w-full cursor-pointer items-center justify-between gap-3 rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-bg px-3 py-1.5 text-left font-anasthasia-sans text-sm text-anasthasia-text outline-none hover:border-anasthasia-accent/40 focus-visible:border-anasthasia-accent focus-visible:ring-1 focus-visible:ring-anasthasia-accent disabled:pointer-events-none disabled:opacity-40 {error
+			class="flex h-[var(--height-anasthasia-control-md)] w-full cursor-pointer items-center justify-between gap-3 rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-bg px-3 text-left font-anasthasia-sans text-[length:var(--font-size-anasthasia-control)] text-anasthasia-text outline-none hover:border-anasthasia-accent/40 focus-visible:border-anasthasia-accent focus-visible:ring-1 focus-visible:ring-anasthasia-accent disabled:pointer-events-none disabled:opacity-40 {error
 				? 'border-anasthasia-danger-border bg-anasthasia-danger-surface'
 				: ''}"
 		>
@@ -218,7 +218,7 @@
 			role="listbox"
 			aria-label={label ?? ariaLabel ?? 'Options'}
 			use:dropdownPortal={{ anchor: control, onclose: close }}
-			class="max-h-56 overflow-auto rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-surface p-1 shadow-xl"
+			class="max-h-56 overflow-auto rounded-anasthasia-lg border border-anasthasia-border bg-anasthasia-surface p-1 shadow-[var(--shadow-anasthasia-floating)]"
 			in:riseIn={{ y: 4 }}
 		>
 			{#if filteredOptions.length === 0}

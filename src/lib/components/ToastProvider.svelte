@@ -44,7 +44,9 @@
 		<div
 			role={item.variant === 'danger' ? 'alert' : 'status'}
 			aria-live={item.variant === 'danger' ? 'assertive' : 'polite'}
-			class="rounded-anasthasia-xl border p-3 shadow-xl {variants[item.variant]}"
+			class="rounded-anasthasia-xl border p-3 shadow-[var(--shadow-anasthasia-floating)] {variants[
+				item.variant
+			]}"
 			in:riseIn={{ y: position.startsWith('top') ? -8 : 8 }}
 			out:glassCollapse
 			onpointerenter={() => toast.pause(item.id)}

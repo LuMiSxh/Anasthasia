@@ -20,11 +20,15 @@
 		...rest
 	}: Props = $props();
 
-	const sizes: Record<ControlSize, string> = { sm: 'h-7 w-7', md: 'h-8 w-8', lg: 'h-10 w-10' };
+	const sizes: Record<ControlSize, string> = {
+		sm: 'size-[var(--height-anasthasia-control-sm)]',
+		md: 'size-[var(--height-anasthasia-control-md)]',
+		lg: 'size-[var(--height-anasthasia-control-lg)]'
+	};
 	const variants: Record<ButtonVariant, string> = {
-		primary: 'anasthasia-primary-action text-anasthasia-on-accent hover:brightness-105',
+		primary: 'anasthasia-primary-action text-anasthasia-on-accent',
 		secondary:
-			'border-anasthasia-border bg-anasthasia-bg text-anasthasia-text hover:border-anasthasia-accent/50',
+			'border-anasthasia-action-secondary-border bg-anasthasia-bg text-anasthasia-action-secondary hover:border-anasthasia-accent/50',
 		ghost:
 			'border-transparent bg-transparent text-anasthasia-muted hover:bg-anasthasia-panel hover:text-anasthasia-text',
 		danger: 'border-anasthasia-danger-border bg-anasthasia-danger-surface text-anasthasia-danger'
@@ -34,7 +38,7 @@
 <button
 	{type}
 	aria-label={label}
-	class="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-anasthasia-lg border transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-anasthasia-accent focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 {sizes[
+	class="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-anasthasia-lg border transition-colors duration-[var(--duration-anasthasia-interaction)] focus-visible:ring-2 focus-visible:ring-anasthasia-accent focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 {sizes[
 		size
 	]} {variants[variant]} {className}"
 	{...rest}

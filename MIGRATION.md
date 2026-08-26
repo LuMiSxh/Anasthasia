@@ -24,14 +24,11 @@ Replace flavour token overrides:
 
 Add semantic info/success/warning/danger foreground, surface, and border tokens to custom flavours when overriding the neutral defaults.
 
-The multicolor flavour was renamed without a compatibility alias:
+The former Dusk/Spectrum multicolor flavour has been removed. Choose one of the maintained flavours instead:
 
 ```css
-/* 0.1 */
-@import 'anasthasia/flavours/dusk';
-
-/* 0.2 */
-@import 'anasthasia/flavours/spectrum';
+@import 'anasthasia/flavours/imperial';
+/* or: hypergryph, bund */
 ```
 
 ## Theme
@@ -118,4 +115,3 @@ import { keyboard, Kbd, KeyHintBar } from 'anasthasia/keyboard';
 - SegmentedControl uses radio semantics and standard Arrow/Home/End navigation.
 - Keyboard shortcuts are ignored in editable controls unless `allowInInput` is true.
 - Toast timers pause on hover/focus and are always cleaned up.
-- Crimson and Spectrum use neutral application surfaces. Spectrum replaces Dusk and uses the blue-to-violet-to-red primary gradient; Imperial is unchanged.

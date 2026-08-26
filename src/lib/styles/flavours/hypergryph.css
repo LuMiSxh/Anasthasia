@@ -26,6 +26,13 @@
 	--color-anasthasia-danger-border: #fca5a5;
 	--font-anasthasia-sans: 'Source Han Sans', 'Noto Sans', system-ui, sans-serif;
 	--font-anasthasia-mono: 'JetBrains Mono', 'SFMono-Regular', monospace;
+	--font-anasthasia-label: 'JetBrains Mono', 'SFMono-Regular', monospace;
+	--font-anasthasia-control: 'Source Han Sans', 'Noto Sans', system-ui, sans-serif;
+	--duration-anasthasia-interaction: 200ms;
+	--translate-anasthasia-active: 0px;
+	--shadow-anasthasia-action: none;
+	--shadow-anasthasia-floating: 0 12px 32px rgb(0 0 0 / 0.22);
+	--shadow-anasthasia-dialog: 0 24px 80px rgb(0 0 0 / 0.42);
 	--radius-anasthasia-sm: 2px;
 	--radius-anasthasia-md: 4px;
 	--radius-anasthasia-lg: 4px;
@@ -57,5 +64,7 @@
 	--color-anasthasia-danger: #fecaca;
 	--color-anasthasia-danger-surface: #450a0a;
 	--color-anasthasia-danger-border: #b91c1c;
+	--shadow-anasthasia-floating: 0 12px 32px rgb(0 0 0 / 0.64);
+	--shadow-anasthasia-dialog: 0 24px 80px rgb(0 0 0 / 0.78);
 	--background-image-anasthasia-accent-gradient: linear-gradient(90deg, #18d1ff, #06bbff);
 }

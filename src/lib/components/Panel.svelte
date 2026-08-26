@@ -24,12 +24,12 @@
 </script>
 
 <section
-	class="overflow-hidden rounded-anasthasia-xl border border-anasthasia-border bg-anasthasia-surface {className}"
+	class="overflow-hidden rounded-anasthasia-xl border border-anasthasia-divider bg-anasthasia-surface {className}"
 	in:riseIn={{ duration: animate ? undefined : 0 }}
 >
 	{#if label || title || actions}
 		<header
-			class="flex items-center justify-between gap-4 border-b border-anasthasia-border bg-anasthasia-panel px-4 py-2.5"
+			class="flex items-center justify-between gap-4 border-b border-anasthasia-divider bg-anasthasia-panel px-4 py-2.5"
 		>
 			<div class="min-w-0">
 				{#if label}
@@ -54,7 +54,7 @@
 		</header>
 	{/if}
 
-	<div class="p-4">
+	<div class="p-[var(--padding-anasthasia-container)]">
 		{@render children()}
 	</div>
 </section>

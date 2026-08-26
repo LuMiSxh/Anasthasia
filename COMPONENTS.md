@@ -170,6 +170,6 @@ Exports: `riseIn`, `riseOut`, `pageFade`, `slideUp`, `slideDown`, `sidebarSlide`
 
 - `anasthasia/styles`: tokens and component utilities
 - `anasthasia/reset`: optional global typography defaults
-- `anasthasia/flavours/{imperial|crimson|spectrum}`: complete light and dark flavour tokens
+- `anasthasia/flavours/{imperial|hypergryph|bund}`: complete light and dark flavour tokens
 
 See [README.md](README.md) for the full token contract and [MIGRATION.md](MIGRATION.md) for 0.1.x migration.

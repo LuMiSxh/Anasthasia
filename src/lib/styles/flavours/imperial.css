@@ -9,6 +9,18 @@
 	--color-anasthasia-accent: #7a5708;
 	--color-anasthasia-accent-strong: #5c4000;
 	--color-anasthasia-on-accent: #ffffff;
+	--font-anasthasia-label: 'Geist Sans', sans-serif;
+	--height-anasthasia-control-sm: 1.75rem;
+	--height-anasthasia-control-md: 2rem;
+	--height-anasthasia-control-lg: 2.5rem;
+	--font-size-anasthasia-control-sm: 0.75rem;
+	--font-size-anasthasia-control: 0.875rem;
+	--duration-anasthasia-interaction: 180ms;
+	--translate-anasthasia-active: 1px;
+	--brightness-anasthasia-action-hover: 1.04;
+	--shadow-anasthasia-action: 0 4px 16px rgb(122 87 8 / 0.24);
+	--shadow-anasthasia-floating: 0 18px 48px rgb(61 44 10 / 0.15);
+	--shadow-anasthasia-dialog: 0 28px 72px rgb(61 44 10 / 0.22);
 	--background-image-anasthasia-accent-gradient: linear-gradient(
 		135deg,
 		#8b650f 0%,
@@ -34,6 +46,10 @@
 	--color-anasthasia-accent: #d4af37;
 	--color-anasthasia-accent-strong: #fde047;
 	--color-anasthasia-on-accent: #17130a;
+	--brightness-anasthasia-action-hover: 1.08;
+	--shadow-anasthasia-action: 0 4px 18px rgb(212 175 55 / 0.22);
+	--shadow-anasthasia-floating: 0 22px 56px rgb(0 0 0 / 0.68);
+	--shadow-anasthasia-dialog: 0 30px 80px rgb(0 0 0 / 0.78);
 	--background-image-anasthasia-accent-gradient: linear-gradient(
 		135deg,
 		#fde047 0%,

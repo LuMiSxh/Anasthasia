@@ -13,7 +13,7 @@
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
 <a
 	{href}
-	class="block rounded-anasthasia-xl border border-anasthasia-border bg-anasthasia-surface p-4 text-left text-anasthasia-text no-underline transition-colors duration-150 hover:border-anasthasia-accent/40 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-anasthasia-accent focus-visible:outline-none active:translate-y-px {className}"
+	class="block rounded-anasthasia-xl border border-anasthasia-divider bg-anasthasia-surface p-[var(--padding-anasthasia-container)] text-left text-anasthasia-text no-underline transition-colors duration-[var(--duration-anasthasia-interaction)] hover:border-anasthasia-accent/40 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-anasthasia-accent focus-visible:outline-none active:translate-y-[var(--translate-anasthasia-active)] {className}"
 	{...rest}
 >
 	{@render children()}
