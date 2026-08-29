@@ -25,8 +25,9 @@
 	--color-anasthasia-danger: #bd0f09;
 	--color-anasthasia-danger-surface: #feece8;
 	--color-anasthasia-danger-border: #db827d;
-	--font-anasthasia-sans: 'Geist Sans', Arial, Helvetica, sans-serif;
-	--font-anasthasia-label: 'Geist Sans', Arial, Helvetica, sans-serif;
+	--font-anasthasia-sans: 'Noto Sans Variable', Arial, Helvetica, sans-serif;
+	--font-anasthasia-label: 'Noto Sans Variable', Arial, Helvetica, sans-serif;
+	--font-anasthasia-control: 'Noto Sans Variable', Arial, Helvetica, sans-serif;
 	--height-anasthasia-control-sm: 1.75rem;
 	--height-anasthasia-control-md: 2rem;
 	--height-anasthasia-control-lg: 2.5rem;

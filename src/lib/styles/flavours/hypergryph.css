@@ -24,10 +24,10 @@
 	--color-anasthasia-danger: #b91c1c;
 	--color-anasthasia-danger-surface: #fef2f2;
 	--color-anasthasia-danger-border: #fca5a5;
-	--font-anasthasia-sans: 'Source Han Sans', 'Noto Sans', system-ui, sans-serif;
+	--font-anasthasia-sans: 'Noto Sans SC Variable', 'Source Han Sans', 'Noto Sans', sans-serif;
 	--font-anasthasia-mono: 'JetBrains Mono', 'SFMono-Regular', monospace;
 	--font-anasthasia-label: 'JetBrains Mono', 'SFMono-Regular', monospace;
-	--font-anasthasia-control: 'Source Han Sans', 'Noto Sans', system-ui, sans-serif;
+	--font-anasthasia-control: 'Noto Sans SC Variable', 'Source Han Sans', 'Noto Sans', sans-serif;
 	--duration-anasthasia-interaction: 200ms;
 	--translate-anasthasia-active: 0px;
 	--shadow-anasthasia-action: none;

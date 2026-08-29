@@ -1,3 +1,5 @@
+import '@fontsource-variable/noto-sans/wght.css';
+import '@fontsource-variable/noto-sans-sc/wght.css';
 import '@fontsource/geist-sans/400.css';
 import '@fontsource/geist-sans/500.css';
 import '@fontsource/geist-sans/600.css';

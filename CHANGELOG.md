@@ -13,6 +13,10 @@ Notable changes are documented here. Before 1.0, patch releases are compatible w
 
 - Updated Imperial to use the new interaction and elevation tokens while preserving its gold-and-black identity.
 
+### Fixed
+
+- Bundled Noto Sans variable families for deterministic Bund and Hypergryph typography across platforms.
+
 ### Removed
 
 - Removed the `crimson` and `spectrum` flavours and package exports.
