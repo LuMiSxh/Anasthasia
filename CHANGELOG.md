@@ -2,6 +2,12 @@
 
 Notable changes are documented here. Before 1.0, patch releases are compatible within their minor line; breaking changes increment the minor version.
 
+## [0.2.4] - 2026-10-09
+
+### Fixed
+
+- Declared the BSD-3-Clause license in `package.json` and the README. Both said MIT, but the `LICENSE` file is BSD 3-Clause.
+
 ## [0.2.3] - 2026-08-26
 
 ### Added
