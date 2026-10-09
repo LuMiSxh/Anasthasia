@@ -6,7 +6,7 @@
 
 Semantic design tokens, interaction utilities, and themed UI primitives for Svelte and Tauri projects.
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/LuMiSxh/Anasthasia)](https://github.com/LuMiSxh/Anasthasia/tags)
 
 [Overview](#overview) • [Features](#features) • [Installation](#installation) • [Quick Start](#quick-start) • [Development](#development)
@@ -148,4 +148,4 @@ Until 1.0, patch releases remain compatible within a minor line. Breaking change
 
 ## License
 
-Anasthasia is licensed under the [MIT License](LICENSE).
+Anasthasia is licensed under the [BSD 3-Clause License](LICENSE).

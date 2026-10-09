@@ -2,7 +2,7 @@
 	"name": "anasthasia",
 	"version": "0.2.3",
 	"description": "Accessible Svelte 5 components and design tokens for desktop-grade applications",
-	"license": "MIT",
+	"license": "BSD-3-Clause",
 	"author": "LuMiSxh",
 	"repository": {
 		"type": "git",
